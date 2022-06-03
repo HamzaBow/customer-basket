@@ -1,8 +1,14 @@
 import React from 'react'
-
-const CartItemView = () => {
+import { CartItem } from '../CartSlice';
+interface Props {
+  cartItem: CartItem
+}
+const CartItemView:React.FC<Props> = ({ cartItem }) => {
   return (
-    <div>CartItem</div>
+    <>
+      <h3>{cartItem.productName}</h3>
+      <h3>{cartItem.quantity}</h3>
+    </>
   )
 }
 

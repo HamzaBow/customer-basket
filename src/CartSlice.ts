@@ -2,16 +2,21 @@ import { createSlice } from "@reduxjs/toolkit";
 import { WritableDraft } from "immer/dist/internal";
 import { ProductItem } from "./productData";
 
-interface CartItem {
+export interface CartItem {
   productName: string;
   quantity: number;
 }
 
-interface CartState {
+interface CartItemsObj {
   items: CartItem[]
 }
+export type CartState = WritableDraft<CartItemsObj>
 
-const initialState: WritableDraft<CartState> = {
+export interface RootState {
+  cart: CartState;
+}
+
+const initialState: CartState = {
   items: []
 }
 

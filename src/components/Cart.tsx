@@ -1,7 +1,14 @@
+import { useSelector } from "react-redux"
+import { RootState } from "../CartSlice"
+import CartItemView from "./CartItemView"
 
 const Cart = () => {
+  const cartItems = useSelector((state: RootState) => state.cart.items)
   return (
-    <div>Cart</div>
+    <>
+      <h2>Cart</h2>
+      {cartItems.map((item) => <CartItemView cartItem={item} /> )}
+    </>
   )
 }
 

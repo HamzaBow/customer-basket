@@ -1,12 +1,12 @@
 import { CSSProperties } from "react";
 // import { addToCart } from "../CartSlice"
 // import { useDispatch } from "react-redux";
+import { ProductItem } from "../productData"
 
 interface Props {
-  name: string;
-  cost: number;
+  productItem: ProductItem;
 }
-const Product:React.FC<Props> = ({name, cost}) => {
+const Product:React.FC<Props> = ({ productItem }) => {
   // const dispatch = useDispatch();
   const productStyle: CSSProperties = {
     borderStyle: "solid",
@@ -23,9 +23,8 @@ const Product:React.FC<Props> = ({name, cost}) => {
 // }
   return (
     <div style={productStyle}>
-      <h3>{name}</h3>
-      <h3>£{cost}</h3>
-      <button>Add to cart</button>
+      <h3>{productItem.name}</h3>
+      <h3>£{productItem.cost}</h3>
       {/* <button onClick={handleAddToCart}>Add to cart</button> */}
     </div>
   );

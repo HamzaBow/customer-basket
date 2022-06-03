@@ -1,9 +1,9 @@
-interface Product {
+export interface ProductItem {
   name: string;
   cost: number;
 }
 
-const productData: Product[] = [
+const productData: ProductItem[] = [
   {
     name: "Butter",
     cost: 0.8

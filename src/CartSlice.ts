@@ -36,17 +36,14 @@ export const cartSlice = createSlice({
         state.items.push({ productName: productItem.name, quantity: 1 })
         return
       }
+
       // product.length === 1
       // increment quantity of already added product to cart.
-      state.items = [
-        ...state.items.filter(
-          (cartItem: CartItem) => cartItem.productName !== productItem.name
-        ),
-        {
-          productName: cartItems[0].productName,
-          quantity: cartItems[0].quantity + 1,
-        },
-      ];
+      for (let i = 0; i < state.items.length; i++) {
+        if (state.items[i].productName === productItem.name){
+          state.items[i].quantity += 1;
+        }
+      }
     }
   }
 })

@@ -3,7 +3,7 @@ interface Product {
   cost: number;
 }
 
-const products: Product[] = [
+const productData: Product[] = [
   {
     name: "Butter",
     cost: 0.8
@@ -18,4 +18,4 @@ const products: Product[] = [
   }
 ]
 
-export default products;
+export default productData;

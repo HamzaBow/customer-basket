@@ -1,9 +1,9 @@
-import products from "../products"
+import productData from "../productData"
 import Product from "./Product"
 const Products = () => {
   return (
     <>
-    { products.map((product) => <Product name={product.name} cost={product.cost} />)
+    { productData.map((product, index) => <Product key={index} name={product.name} cost={product.cost} />)
     }
     </>
   )

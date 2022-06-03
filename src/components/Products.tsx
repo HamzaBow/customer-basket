@@ -1,6 +1,11 @@
+import products from "../products"
+import Product from "./Product"
 const Products = () => {
   return (
-    <div>Products</div>
+    <>
+    { products.map((product) => <Product name={product.name} cost={product.cost} />)
+    }
+    </>
   )
 }
 

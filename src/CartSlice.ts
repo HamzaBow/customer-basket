@@ -1,17 +1,47 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { WritableDraft } from "immer/dist/internal";
+import { ProductItem } from "./productData";
 
 interface CartItem {
   productName: string;
   quantity: number;
 }
-const initialState: CartItem[] = []
 
+interface CartState {
+  items: CartItem[]
+}
+
+const initialState: WritableDraft<CartState> = {
+  items: []
+}
+
+interface PayloadWrapper {
+  payload: ProductItem;
+}
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, { payload: cartItem }) => {
-      state.push(cartItem)
+    addToCart: (state, { payload: productItem }: PayloadWrapper): void => {
+      const cartItems = state.items.filter((cartItem: CartItem) => cartItem.productName === productItem.name)
+      if (cartItems.length > 1) {
+        throw new Error("Two products of the same category cannot exist in Cart")
+      }
+      if (cartItems.length === 0) {
+        state.items.push({ productName: productItem.name, quantity: 1 })
+        return
+      }
+      // product.length === 1
+      // increment quantity of already added product to cart.
+      state.items = [
+        ...state.items.filter(
+          (cartItem: CartItem) => cartItem.productName !== productItem.name
+        ),
+        {
+          productName: cartItems[0].productName,
+          quantity: cartItems[0].quantity + 1,
+        },
+      ];
     }
   }
 })

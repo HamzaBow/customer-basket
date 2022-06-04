@@ -9,8 +9,7 @@ interface Props {
 const Product:React.FC<Props> = ({ productItem }) => {
   const dispatch = useDispatch();
   const productStyle: CSSProperties = {
-    borderStyle: "solid",
-    borderWidth: "1px",
+    border: "1px solid gray",
     borderRadius: "10px",
     margin: "10px",
     padding: "10px",
@@ -18,11 +17,18 @@ const Product:React.FC<Props> = ({ productItem }) => {
   const handleAddToCart = () => {
     dispatch(addToCart(productItem));
   };
+  const btnAddStyle: CSSProperties = {
+    fontSize: "16pt",
+    padding: "5px 15px",
+    backgroundColor: "yellow",
+    color: "black",
+    borderRadius: "5px",
+  }
   return (
     <div style={productStyle}>
       <h3>{productItem.name}</h3>
       <h3>£{productItem.cost}</h3>
-      <button onClick={handleAddToCart}>Add to cart</button>
+      <button onClick={handleAddToCart} style={btnAddStyle}>Add to cart</button>
     </div>
   );
 }

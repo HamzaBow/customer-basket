@@ -101,7 +101,15 @@ export const cartSlice = createSlice({
           // customer bought at least 2 Butter
           for (let i = 0; i < state.items.length; i++) {
             if (state.items[i].productName === "Bread") {
-              state.items[i].discount = state.items[i].unitCost * 0.5;
+              let discount = 0;
+              let breadQuantity = breadItems[0].quantity;
+              let butterQuantity = butterItems[0].quantity;
+              while ((breadQuantity > 0) && (butterQuantity >= 2)){
+                 discount += state.items[i].unitCost * 0.5;
+                 breadQuantity -= 1;
+                 butterQuantity -= 2;
+              }
+              state.items[i].discount = discount
               break;
             }
           }

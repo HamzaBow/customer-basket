@@ -1,6 +1,7 @@
 import React, { CSSProperties } from 'react'
 import { useDispatch } from 'react-redux';
 import { CartItem, decrementQuantity, incrementQuantity } from '../CartSlice';
+import { moneyFormat } from '../utils';
 interface Props {
   cartItem: CartItem
 }
@@ -31,6 +32,9 @@ const CartItemView:React.FC<Props> = ({ cartItem }) => {
   return (
     <div style={cartItemStyle}>
       <h3>{cartItem.productName}</h3>
+      <h3 style={{ float: "right" }}>
+        {moneyFormat(cartItem.unitCost * cartItem.quantity)}
+      </h3>
       <h3 style={{ display: "inline-block", marginRight: "15px"}}>Quantity</h3>
       <button style={buttonStyle} onClick={decrementQ}>-</button>
       <h3 style={{ display: "inline-block", margin: "15px"}}>{cartItem.quantity}</h3>

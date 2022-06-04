@@ -1,4 +1,3 @@
-import { CSSProperties } from "react";
 import { addToCart } from "../CartSlice"
 import { useDispatch } from "react-redux";
 import { ProductItem } from "../productData"
@@ -11,22 +10,28 @@ interface Props {
 }
 const Product:React.FC<Props> = ({ productItem }) => {
   const dispatch = useDispatch();
-  const productStyle: CSSProperties = {
-    border: "1px solid gray",
-    borderRadius: "10px",
-    margin: "10px",
-    padding: "10px",
-  }
   const handleAddToCart = () => {
     dispatch(addToCart(productItem));
   };
   return (
-    <div style={productStyle}>
-      <img className='product-img' src={`/images/${productItem.name}.jpg`} alt={productItem.name} />
-      <h3>{productItem.name}</h3>
-      <h3>{moneyFormat(productItem.cost)}</h3>
-      <button onClick={handleAddToCart} className={"btn-add-to-cart"}>Add to cart</button>
-      <StarRating />
+    <div className="product">
+      <div className="top">
+        <img
+          className="product-img"
+          src={`/images/${productItem.name}.jpg`}
+          alt={productItem.name}
+        />
+        <h3 className="product-name">{productItem.name}</h3>
+        <div>
+          <StarRating />
+          <h3 className="product-cost">{moneyFormat(productItem.cost)}</h3>
+        </div>
+      </div>
+      <div className="btn-add-to-cart-wr">
+        <button onClick={handleAddToCart} className={"btn-add-to-cart"}>
+          Add to cart
+        </button>
+      </div>
     </div>
   );
 }

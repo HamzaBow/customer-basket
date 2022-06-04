@@ -1,0 +1,7 @@
+.btn-add-to-cart {
+  font-size: 16pt;
+  padding: 5px 15px;
+  background-color: hsl(60, 100%, 50%);
+  color: black;
+  border-radius: 5px;
+}

@@ -5,6 +5,7 @@ import { ProductItem } from "./productData";
 export interface CartItem {
   productName: string;
   quantity: number;
+  unitCost: number;
 }
 
 interface CartItemsObj {
@@ -36,7 +37,7 @@ export const cartSlice = createSlice({
         throw new Error("Product already in cart!")
       }
       if (cartItems.length === 0) {
-        state.items.push({ productName: productItem.name, quantity: 1 })
+        state.items.push({ productName: productItem.name, quantity: 1, unitCost: productItem.cost })
       }
     },
     incrementQuantity: (state, {payload: name}): void => {

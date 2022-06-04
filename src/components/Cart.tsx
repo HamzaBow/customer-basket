@@ -18,6 +18,7 @@ const Cart = () => {
   const emptyTxtStyle: CSSProperties = {
     textAlign: "center",
     color: "gray",
+    marginBottom: "30px",
   };
   return (
     <div style={cartSectionStyle}>
@@ -25,34 +26,42 @@ const Cart = () => {
       {cartItems.length === 0 ? (
         <h3 style={emptyTxtStyle}>Cart is empty!</h3>
       ) : (
-        cartItems.map((item) => <CartItemView cartItem={item} />)
+        <>
+          {cartItems.map((item) => (
+            <CartItemView cartItem={item} />
+          ))}
+          <div className="cart-totals">
+            <h2 className="label">Subtotal</h2>
+            <h2 className="quantity">
+              {moneyFormat(
+                cartItems.reduce(
+                  (prev, current) => prev + current.quantity * current.unitCost,
+                  0
+                )
+              )}
+            </h2>
+            <h2 className="label">Discount</h2>
+            <h2 className="quantity">
+              {moneyFormat(
+                cartItems.reduce((prev, current) => prev + current.discount, 0)
+              )}
+            </h2>
+            <h2 className="label">Total</h2>
+            <h2 className="quantity">
+              {moneyFormat(
+                cartItems.reduce(
+                  (prev, current) => prev + current.quantity * current.unitCost,
+                  0
+                ) -
+                  cartItems.reduce(
+                    (prev, current) => prev + current.discount,
+                    0
+                  )
+              )}
+            </h2>
+          </div>
+        </>
       )}
-      <div className="cart-totals">
-        <h2 className="label">Subtotal</h2>
-        <h2 className="quantity">
-          {moneyFormat(
-            cartItems.reduce(
-              (prev, current) => prev + current.quantity * current.unitCost,
-              0
-            )
-          )}
-        </h2>
-        <h2 className="label">Discount</h2>
-        <h2 className="quantity">
-          {moneyFormat(
-            cartItems.reduce((prev, current) => prev + current.discount, 0)
-          )}
-        </h2>
-        <h2 className="label">Total</h2>
-        <h2 className="quantity">
-          {moneyFormat(
-            cartItems.reduce(
-              (prev, current) => prev + current.quantity * current.unitCost,
-              0
-            ) - cartItems.reduce((prev, current) => prev + current.discount, 0)
-          )}
-        </h2>
-      </div>
     </div>
   );
 };

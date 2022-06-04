@@ -37,7 +37,20 @@ const Cart = () => {
       </h2>
       <br />
       <h2>Discount</h2>
+      <h2>
+        {moneyFormat(
+          cartItems.reduce((prev, current) => prev + current.discount, 0)
+        )}
+      </h2>
       <h2>Total</h2>
+      <h2>
+        {moneyFormat(
+          cartItems.reduce(
+            (prev, current) => prev + current.quantity * current.unitCost,
+            0
+          ) - cartItems.reduce((prev, current) => prev + current.discount, 0)
+        )}
+      </h2>
     </div>
   );
 }

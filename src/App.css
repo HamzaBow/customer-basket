@@ -14,7 +14,6 @@
 }
 
 .item-old-total  {
-  float: right;
   text-decoration: line-through;
   text-decoration-thickness: 1.5px;
   text-decoration-color: red;
@@ -22,7 +21,7 @@
 }
 
 .item-new-total  {
-  float: right;
+  font-weight: bold;
 }
 
 .cart-item {
@@ -35,8 +34,33 @@
   align-items: center;
 }
 
+.cart-item .middle-section {
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.middle-section .quantity-section {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
 .cart-item-img {
   width: 100px;
   aspect-ratio: 1;
   border-radius: 50%;
+}
+
+
+.cart-totals .label {
+  color: gray;
+  text-align: right;
+  margin-right: 20px;
+  margin-bottom: 0px;
+}
+
+.cart-totals .quantity {
+  text-align: right;
+  margin-right: 20px;
+  margin-top: 5px;
 }

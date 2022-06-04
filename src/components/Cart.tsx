@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../CartSlice";
 import { moneyFormat } from "../utils";
 import CartItemView from "./CartItemView";
+import "../App.css";
 
 const Cart = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -26,31 +27,32 @@ const Cart = () => {
       ) : (
         cartItems.map((item) => <CartItemView cartItem={item} />)
       )}
-      <h2 style={{ textAlign: "right", marginRight: "20px" }}>Subtotal</h2>
-      <h2 style={{ color: "gray", textAlign: "right", marginRight: "20px" }}>
-        {moneyFormat(
-          cartItems.reduce(
-            (prev, current) => prev + current.quantity * current.unitCost,
-            0
-          )
-        )}
-      </h2>
-      <br />
-      <h2>Discount</h2>
-      <h2>
-        {moneyFormat(
-          cartItems.reduce((prev, current) => prev + current.discount, 0)
-        )}
-      </h2>
-      <h2>Total</h2>
-      <h2>
-        {moneyFormat(
-          cartItems.reduce(
-            (prev, current) => prev + current.quantity * current.unitCost,
-            0
-          ) - cartItems.reduce((prev, current) => prev + current.discount, 0)
-        )}
-      </h2>
+      <div className="cart-totals">
+        <h2 className="label">Subtotal</h2>
+        <h2 className="quantity">
+          {moneyFormat(
+            cartItems.reduce(
+              (prev, current) => prev + current.quantity * current.unitCost,
+              0
+            )
+          )}
+        </h2>
+        <h2 className="label">Discount</h2>
+        <h2 className="quantity">
+          {moneyFormat(
+            cartItems.reduce((prev, current) => prev + current.discount, 0)
+          )}
+        </h2>
+        <h2 className="label">Total</h2>
+        <h2 className="quantity">
+          {moneyFormat(
+            cartItems.reduce(
+              (prev, current) => prev + current.quantity * current.unitCost,
+              0
+            ) - cartItems.reduce((prev, current) => prev + current.discount, 0)
+          )}
+        </h2>
+      </div>
     </div>
   );
 };

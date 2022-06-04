@@ -32,11 +32,31 @@ const CartItemView:React.FC<Props> = ({ cartItem }) => {
     dispatch(applyDiscounts());
   }, [cartItem.quantity])
 
+  const itemOldTotalStyle: CSSProperties = {
+    float: "right",
+    textDecoration: "line-through",
+    textDecorationThickness: "1.5px",
+    textDecorationColor: "red",
+    color: "red"
+  }
+
+  const itemNewTotalStyle: CSSProperties = {
+    float: "right",
+  };
+
   return (
     <div style={cartItemStyle}>
       <h3>{cartItem.productName}</h3>
-      <h3 style={{ float: "right" }}>
-        {moneyFormat(cartItem.unitCost * cartItem.quantity)}
+      {!!cartItem.discount && (
+        <>
+          <h3 style={itemOldTotalStyle}>
+            {moneyFormat(cartItem.unitCost * cartItem.quantity)}
+          </h3>
+          <br />
+        </>
+      )}
+      <h3 style={itemNewTotalStyle}>
+        {moneyFormat(cartItem.unitCost * cartItem.quantity - cartItem.discount)}
       </h3>
       <h3 style={{ display: "inline-block", marginRight: "15px" }}>Quantity</h3>
       <button style={buttonStyle} onClick={decrementQ}>

@@ -1,6 +1,6 @@
-import React, { CSSProperties } from 'react'
+import React, { CSSProperties, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
-import { CartItem, decrementQuantity, incrementQuantity } from '../CartSlice';
+import { CartItem, decrementQuantity, incrementQuantity, applyDiscounts } from '../CartSlice';
 import { moneyFormat } from '../utils';
 interface Props {
   cartItem: CartItem
@@ -28,6 +28,9 @@ const CartItemView:React.FC<Props> = ({ cartItem }) => {
     borderRadius: "50%",
     borderStyle: "solid",
   }
+  useEffect(() => {
+    dispatch(applyDiscounts());
+  }, [cartItem.quantity])
 
   return (
     <div style={cartItemStyle}>

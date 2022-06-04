@@ -6,10 +6,11 @@ export interface CartItem {
   productName: string;
   quantity: number;
   unitCost: number;
+  discount: number;
 }
 
 interface CartItemsObj {
-  items: CartItem[]
+  items: CartItem[];
 }
 export type CartState = WritableDraft<CartItemsObj>
 
@@ -18,7 +19,7 @@ export interface RootState {
 }
 
 const initialState: CartState = {
-  items: []
+  items: [],
 }
 
 interface PayloadWrapper {
@@ -37,7 +38,7 @@ export const cartSlice = createSlice({
         throw new Error("Product already in cart!")
       }
       if (cartItems.length === 0) {
-        state.items.push({ productName: productItem.name, quantity: 1, unitCost: productItem.cost })
+        state.items.push({ productName: productItem.name, quantity: 1, unitCost: productItem.cost, discount: 0 })
       }
     },
     incrementQuantity: (state, {payload: name}): void => {
@@ -68,10 +69,34 @@ export const cartSlice = createSlice({
       if (cartItems.length === 0) {
         throw new Error("Product not in cart!")
       }
+    },
+    applyDiscounts: (state) => {
+      // *** Bread Discount ***
+      const breadItems = state.items.filter((cartItem: CartItem) => cartItem.productName === "Bread")
+      if (breadItems.length === 1) { //customer bought bread
+        // check if customer bought 2 Butter
+        const butterItems = state.items.filter((cartItem: CartItem) => cartItem.productName === "Butter")
+          if ((butterItems.length === 1) && (butterItems[0].quantity >= 2)) {
+            // customer bought at least 2 Butter
+            for (let i = 0; i < state.items.length; i++) {
+              if (state.items[i].productName === "Bread") {
+                state.items[i].discount = state.items[i].unitCost * 0.5;
+                return;
+              }
+            }
+          } else { // customer didn't buy Butter or bought only one
+            for (let i = 0; i < state.items.length; i++) {
+              if (state.items[i].productName === "Bread") {
+                state.items[i].discount = 0;
+                return;
+              }
+            }
+          }
+      }
     }
   }
 })
 
-export const { addToCart, incrementQuantity, decrementQuantity } = cartSlice.actions;
+export const { addToCart, incrementQuantity, decrementQuantity, applyDiscounts } = cartSlice.actions;
 
 export default cartSlice.reducer;

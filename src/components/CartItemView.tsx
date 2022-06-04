@@ -16,13 +16,6 @@ const CartItemView:React.FC<Props> = ({ cartItem }) => {
     dispatch(decrementQuantity(cartItem.productName))
   }
 
-  const cartItemStyle: CSSProperties = {
-    border: "1px solid gray",
-    borderRadius: "10px",
-    margin: "10px",
-    padding: "10px",
-  }
-
   const buttonStyle: CSSProperties = {
     fontSize: "22pt",
     width: "50px",
@@ -36,7 +29,7 @@ const CartItemView:React.FC<Props> = ({ cartItem }) => {
 
 
   return (
-    <div style={cartItemStyle}>
+    <div className='cart-item'>
       <h3>{cartItem.productName}</h3>
       {!!cartItem.discount && (
         <>

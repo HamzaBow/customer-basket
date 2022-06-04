@@ -1,11 +1,11 @@
-import { CSSProperties } from "react"
-import { useSelector } from "react-redux"
-import { RootState } from "../CartSlice"
-import { moneyFormat } from "../utils"
-import CartItemView from "./CartItemView"
+import { CSSProperties } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../CartSlice";
+import { moneyFormat } from "../utils";
+import CartItemView from "./CartItemView";
 
 const Cart = () => {
-  const cartItems = useSelector((state: RootState) => state.cart.items)
+  const cartItems = useSelector((state: RootState) => state.cart.items);
   const cartSectionStyle: CSSProperties = {
     borderWidth: "1px",
     borderStyle: "solid",
@@ -13,11 +13,11 @@ const Cart = () => {
     width: "40vw",
     margin: "10px",
     display: "inline-block",
-  }
+  };
   const emptyTxtStyle: CSSProperties = {
     textAlign: "center",
-    color: "gray"
-  }
+    color: "gray",
+  };
   return (
     <div style={cartSectionStyle}>
       <h2 style={{ marginLeft: "20px" }}>Cart</h2>
@@ -26,8 +26,8 @@ const Cart = () => {
       ) : (
         cartItems.map((item) => <CartItemView cartItem={item} />)
       )}
-      <h2 style={{ textAlign: "right", marginRight: "20px"}}>Subtotal</h2>
-      <h2 style={{ color: "gray", textAlign: "right", marginRight: "20px"}}>
+      <h2 style={{ textAlign: "right", marginRight: "20px" }}>Subtotal</h2>
+      <h2 style={{ color: "gray", textAlign: "right", marginRight: "20px" }}>
         {moneyFormat(
           cartItems.reduce(
             (prev, current) => prev + current.quantity * current.unitCost,
@@ -53,6 +53,6 @@ const Cart = () => {
       </h2>
     </div>
   );
-}
+};
 
-export default Cart
+export default Cart;

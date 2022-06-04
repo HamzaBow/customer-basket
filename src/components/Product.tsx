@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { ProductItem } from "../productData"
 import { moneyFormat } from "../utils";
 import "../App.css"
+import StarRating from "./StarRating";
 
 interface Props {
   productItem: ProductItem;
@@ -24,6 +25,7 @@ const Product:React.FC<Props> = ({ productItem }) => {
       <h3>{productItem.name}</h3>
       <h3>{moneyFormat(productItem.cost)}</h3>
       <button onClick={handleAddToCart} className={"btn-add-to-cart"}>Add to cart</button>
+      <StarRating />
     </div>
   );
 }

@@ -30,6 +30,7 @@ const CartItemView:React.FC<Props> = ({ cartItem }) => {
 
   return (
     <div className='cart-item'>
+      <img className='cart-item-img' src={`/images/${cartItem.productName}.jpg`} alt={cartItem.productName} />
       <h3>{cartItem.productName}</h3>
       {!!cartItem.discount && (
         <>

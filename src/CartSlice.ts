@@ -93,9 +93,33 @@ export const cartSlice = createSlice({
             }
           }
       }
-    }
-  }
-})
+      // *** Milk Discount ***
+      const milkItems = state.items.filter(
+        (cartItem: CartItem) => cartItem.productName === "Milk"
+      );
+      if (milkItems.length !== 1){
+        return
+      }
+      if (milkItems[0].quantity >= 4) {
+        //customer bought 3 milk
+        for (let i = 0; i < state.items.length; i++) {
+          if (state.items[i].productName === "Milk") {
+            state.items[i].discount = state.items[i].unitCost;
+            return;
+          }
+        }
+      } else {
+        // remove discount (customer didn't buy 3 milk)
+        for (let i = 0; i < state.items.length; i++) {
+          if (state.items[i].productName === "Milk") {
+            state.items[i].discount = 0;
+            return;
+          }
+        }
+      }
+    },
+  },
+});
 
 export const { addToCart, incrementQuantity, decrementQuantity, applyDiscounts } = cartSlice.actions;
 

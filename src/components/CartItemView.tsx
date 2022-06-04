@@ -31,28 +31,32 @@ const CartItemView:React.FC<Props> = ({ cartItem }) => {
   return (
     <div className='cart-item'>
       <img className='cart-item-img' src={`/images/${cartItem.productName}.jpg`} alt={cartItem.productName} />
-      <h3>{cartItem.productName}</h3>
-      {!!cartItem.discount && (
-        <>
-          <h3 className="item-old-total">
-            {moneyFormat(cartItem.unitCost * cartItem.quantity)}
-          </h3>
-          <br />
-        </>
-      )}
-      <h3 className='item-new-total'>
-        {moneyFormat(cartItem.unitCost * cartItem.quantity - cartItem.discount)}
-      </h3>
-      <h3 style={{ display: "inline-block", marginRight: "15px" }}>Quantity</h3>
-      <button style={buttonStyle} onClick={decrementQ}>
-        -
-      </button>
-      <h3 style={{ display: "inline-block", margin: "15px" }}>
-        {cartItem.quantity}
-      </h3>
-      <button style={buttonStyle} onClick={incrementQ}>
-        +
-      </button>
+      <div>
+        <h3>{cartItem.productName}</h3>
+        <h3 style={{ display: "inline-block", marginRight: "15px" }}>Quantity</h3>
+        <button style={buttonStyle} onClick={decrementQ}>
+          -
+        </button>
+        <h3 style={{ display: "inline-block", margin: "15px" }}>
+          {cartItem.quantity}
+        </h3>
+        <button style={buttonStyle} onClick={incrementQ}>
+          +
+        </button>
+      </div>
+      <div>
+        {!!cartItem.discount && (
+          <>
+            <h3 className="item-old-total">
+              {moneyFormat(cartItem.unitCost * cartItem.quantity)}
+            </h3>
+            <br />
+          </>
+        )}
+        <h3 className='item-new-total'>
+          {moneyFormat(cartItem.unitCost * cartItem.quantity - cartItem.discount)}
+        </h3>
+      </div>
     </div>
   );
 }

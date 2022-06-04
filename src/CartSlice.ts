@@ -102,7 +102,7 @@ export const cartSlice = createSlice({
           for (let i = 0; i < state.items.length; i++) {
             if (state.items[i].productName === "Bread") {
               state.items[i].discount = state.items[i].unitCost * 0.5;
-              return;
+              break;
             }
           }
         } else {
@@ -110,7 +110,7 @@ export const cartSlice = createSlice({
           for (let i = 0; i < state.items.length; i++) {
             if (state.items[i].productName === "Bread") {
               state.items[i].discount = 0;
-              return;
+              break;
             }
           }
         }
@@ -122,17 +122,16 @@ export const cartSlice = createSlice({
       if (milkItems.length !== 1) {
         return;
       }
-      if (milkItems[0].quantity === 4) {
+      if (milkItems[0].quantity >= 4) {
         //customer bought 3 milk
         for (let i = 0; i < state.items.length; i++) {
           if (state.items[i].productName === "Milk") {
-            state.items[i].quantity += 1;
             state.items[i].discount = state.items[i].unitCost;
             return;
           }
         }
       } else {
-        // remove discount (customer didn't buy 3 milk)
+        // remove discount (customer didn't buy more than 3 milk)
         for (let i = 0; i < state.items.length; i++) {
           if (state.items[i].productName === "Milk") {
             state.items[i].discount = 0;

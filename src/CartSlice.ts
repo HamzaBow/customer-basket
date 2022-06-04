@@ -40,11 +40,6 @@ export const cartSlice = createSlice({
       }
     },
     incrementQuantity: (state, {payload: name}): void => {
-      const cartItems = state.items.filter((cartItem: CartItem) => cartItem.productName === name)
-      if (cartItems.length === 0) {
-        state.items.push({ productName: name, quantity: 1 })
-        return;
-      }
       for (let i = 0; i < state.items.length; i++) {
         if (state.items[i].productName === name){
           state.items[i].quantity += 1;

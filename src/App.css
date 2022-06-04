@@ -5,3 +5,10 @@
   color: black;
   border-radius: 5px;
 }
+.btn-add-to-cart:hover {
+  background-color: hsl(60, 85%, 45%);
+}
+
+.btn-add-to-cart:active {
+  background-color: hsl(60, 75%, 40%);
+}

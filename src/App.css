@@ -12,3 +12,15 @@
 .btn-add-to-cart:active {
   background-color: hsl(60, 75%, 40%);
 }
+
+.item-old-total  {
+  float: right;
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: red;
+  color: red;
+}
+
+.item-new-total  {
+  float: right;
+};

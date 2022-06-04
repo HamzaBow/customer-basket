@@ -26,8 +26,8 @@ const Cart = () => {
       ) : (
         cartItems.map((item) => <CartItemView cartItem={item} />)
       )}
-      <h2>Subtotal</h2>
-      <h2 style={{ color: "gray" }}>
+      <h2 style={{ textAlign: "right", marginRight: "20px"}}>Subtotal</h2>
+      <h2 style={{ color: "gray", textAlign: "right", marginRight: "20px"}}>
         {moneyFormat(
           cartItems.reduce(
             (prev, current) => prev + current.quantity * current.unitCost,

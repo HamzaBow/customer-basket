@@ -22,6 +22,7 @@ const Product:React.FC<Props> = ({ productItem }) => {
   };
   return (
     <div style={productStyle}>
+      <img className='product-img' src={`/images/${productItem.name}.jpg`} alt={productItem.name} />
       <h3>{productItem.name}</h3>
       <h3>{moneyFormat(productItem.cost)}</h3>
       <button onClick={handleAddToCart} className={"btn-add-to-cart"}>Add to cart</button>

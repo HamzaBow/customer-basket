@@ -8,8 +8,20 @@ function App() {
     justifyContent: "space-evenly",
     alignItems: "flex-start",
   }
+  const handleClick = () => {
+    const colorScheme =
+      document.documentElement.style.getPropertyValue("--color-scheme");
+      console.log('cs:', colorScheme)
+    if (colorScheme === "dark") {
+      document.documentElement.style.setProperty("--color-scheme", "light");
+      return;
+    }
+    document.documentElement.style.setProperty("--color-scheme", "dark");
+  }
   return (
     <div className="App">
+      <input type={"checkbox"} onClick={handleClick}/>
+      <span>Dark Theme</span>
       <div style={wrapperStyle}>
         <Products />
         <Cart />

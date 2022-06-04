@@ -99,3 +99,7 @@
 .btn-add-to-cart:active {
   background-color: hsl(199, 75%, 40%);
 }
+
+.btn-add-to-cart:disabled {
+  background-color: gray;
+}

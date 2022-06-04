@@ -1,5 +1,5 @@
-import { addToCart } from "../CartSlice"
-import { useDispatch } from "react-redux";
+import { addToCart, CartItem, RootState } from "../CartSlice"
+import { useDispatch, useSelector } from "react-redux";
 import { ProductItem } from "../productData"
 import { moneyFormat } from "../utils";
 import "../App.css"
@@ -9,10 +9,18 @@ interface Props {
   productItem: ProductItem;
 }
 const Product:React.FC<Props> = ({ productItem }) => {
+  const cartItems = useSelector((state: RootState) => state.cart.items)
   const dispatch = useDispatch();
   const handleAddToCart = () => {
     dispatch(addToCart(productItem));
   };
+  const isItemInCart = () => {
+    return (
+      cartItems.filter(
+        (cartItem: CartItem) => cartItem.productName === productItem.name
+      ).length === 1
+    );
+  }
   return (
     <div className="product">
       <div className="top">
@@ -28,8 +36,12 @@ const Product:React.FC<Props> = ({ productItem }) => {
         </div>
       </div>
       <div className="btn-add-to-cart-wr">
-        <button onClick={handleAddToCart} className={"btn-add-to-cart"}>
-          Add to cart
+        <button onClick={handleAddToCart} className={"btn-add-to-cart"} disabled={isItemInCart()}>
+          { isItemInCart() ?
+            "Already in cart"
+            :
+            "Add to cart"
+          }
         </button>
       </div>
     </div>

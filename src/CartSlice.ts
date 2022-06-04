@@ -126,7 +126,8 @@ export const cartSlice = createSlice({
         //customer bought 3 milk
         for (let i = 0; i < state.items.length; i++) {
           if (state.items[i].productName === "Milk") {
-            state.items[i].discount = state.items[i].unitCost;
+            state.items[i].discount =
+              state.items[i].unitCost * Math.floor(state.items[i].quantity / 4);
             return;
           }
         }

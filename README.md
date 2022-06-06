@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Customer Basket
+
+This is a coding challenge that consists of creating a customer basket that allows users to add products and provides them with the total cost of the basket including discounts.
+
+The app uses React and Redux Toolkit.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
